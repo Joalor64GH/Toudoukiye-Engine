@@ -3,7 +3,10 @@
 
 	<!-- _________________________ Application Settings _________________________ -->
 
-	<app title="Forever Engine Legacy" file="Forever Engine Legacy" packageName="com.yoshubs.foreverenginelegacy" package="com.yoshubs.foreverenginelegacy" main="Main" version="0.3.1" company="Yoshubs" />
+	<app title="Toudoukiye Engine" packageName="com.joalor64gh.toudoukiyeengine" package="com.joalor64gh.toudoukiyeengine" main="Main" version="0.1.0" company="Joalor64GH" />
+    <app file="ToudoukiyeWIN" if="windows" />
+	<app file="ToudoukiyeAPP" if="linux" />
+	<app file="ToudoukiyeMAC" if="mac" />
 
 	<!--The flixel preloader is not accurate in Chrome. You can use it regularly if you embed the swf into a html file
 		or you can set the actual size of your file manually at "FlxPreloaderBase-onUpdate-bytesTotal"-->
@@ -28,7 +31,9 @@
 
 	<!-- _____________________________ Custom Defines ____________________________ -->
 
+    <define name="VIDEO_PLUGIN" if="web || windows" unless="32bits"/>
 	<define name="DISCORD_RPC" if="desktop" unless="web || neko" />
+	<define name="MODS_ALLOWED" if="desktop" />
 
 	<!-- _____________________________ Path Settings ____________________________ -->
 
@@ -47,18 +52,25 @@
 	<assets path="assets/songs" />
 	<assets path="assets/music" preload="true" />
 	<assets path="FE-CrashDialog.exe" type="template" if="windows release" />
-
-	<!--<assets path="mods" />-->
+	<section if="MODS_ALLOWED">
+	        <assets path='example_mods' rename='mods' embed='false'/>
+	</section>
 
 	<!-- _______________________________ Libraries ______________________________ -->
 
 	<haxedev set='webgl' if="html5" />
 
+    <haxelib name="hscript" />
+	<haxelib name="hscript-ex" />
+	<haxedef name="hscriptPos" value="true" />
 	<haxelib name="flixel" />
 	<haxelib name="flixel-addons" />
 	<haxelib name="flixel-ui" />
+	<haxelib name="hxCodec" if="VIDEO_PLUGIN"/>
 	<haxelib name="discord_rpc" if="DISCORD_RPC" />
-	<haxelib name="polymod" />
+	<haxelib name="polymod" if="MODS_ALLOWED"/>
+
+	<haxedef name="no-deprecation-warnings" />
 
 	<!-- ______________________________ Haxedefines _____________________________ -->
 
